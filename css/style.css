@@ -12866,8 +12866,20 @@ textarea.form-control {
 
 .block-7 .btn-primary:hover,
 .block-7 .btn-primary:focus {
-  background: #00bd56 !important;
+  /* background: #00bd56 !important; */
   color: #fff;
+}
+
+.ftco-section .ftco-animate .text-center .btn:hover {
+  background-color: white;
+  color: #00bd56;
+  border: 1px solid #00bd56;
+}
+
+.hero-wrap .btn:hover {
+  background-color: white;
+  color: #00bd56;
+  border: none;
 }
 
 .block-7:hover,
@@ -12946,7 +12958,7 @@ ion-icon {
   transform: scale(1.1);
 }
 
-.ftco-appointment .container .row .appointment .form-control{
+.ftco-appointment .container .row .appointment .form-control {
   /* background-color: #00bd56; */
   padding-right: 40px;
 }
