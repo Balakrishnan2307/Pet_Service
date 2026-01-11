@@ -12891,19 +12891,69 @@ textarea.form-control {
   width: 100%;
   content: '';
   opacity: 1;
-  background: #207dff;
-  background: -moz-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
+  background: #00bd56;
+  /* background: -moz-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
   background: -webkit-gradient(left bottom, right top, color-stop(0%, #207dff), color-stop(100%, #00bd55));
   background: -webkit-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
   background: -o-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
   background: -ms-linear-gradient(45deg, #207dff 0%, #00bd55 100%);
   background: linear-gradient(45deg, #207dff 0%, #00bd55 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#207dff', endColorstr='#00bd55', GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#207dff', endColorstr='#00bd55', GradientType=1); */
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  top: 0;
+  background-color: white;
+}
+
+.navbar ul li a {
+  margin-right: 20px;
+  color: black;
+
+}
+
+.form-group .btn:hover {
+  background-color: white;
+  color: #00bd56;
+  border: none;
+}
+
+ion-icon {
+  background-color: #00bd56;
+  color: #fff;
+  /* padding: 10px; */
+  border: none;
+  font-size: 1.5em;
+}
+
+.navbar-toggler {
+  border: none;
+  border-color: #fff;
+  background-color: #00bd56;
+}
+
+.navbar .navbar-nav .nav-item .active {
+  color: #00bd56;
+  font-weight: 700;
+}
+
+.navbar .navbar-nav .nav-item .nav-link:hover {
+  color: #00bd56;
+  font-weight: 700;
+  transform: scale(1.1);
+}
+
+.ftco-appointment .container .row .appointment .form-control{
+  /* background-color: #00bd56; */
+  padding-right: 40px;
 }
 
 @media (min-width: 992px) {
   .ftco-appointment .overlay {
-    width: 50%;
+    width: 100%;
   }
 }
 
