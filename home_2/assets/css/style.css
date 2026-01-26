@@ -2839,7 +2839,9 @@ hr {
     background-image: url(../../../images/bg_1.jpg);
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover
+    background-size: cover;
+    background-color: black;
+    filter: brightness(20%);
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
@@ -3361,10 +3363,15 @@ hr {
 }
 
 .contact-form-main .form-tittle {
-    background-image: url(../img/gallery/contact_bg.png);
+    /* background-image: url(../img/gallery/contact_bg.png); */
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 68px 51px 0px 67px
+    padding: 68px 51px 0px 67px;
+    color: #00bd56;
+}
+.contact-form-main .form-tittle h2{
+    
+    color: black;
 }
 
 @media (max-width: 575px) {
@@ -3374,7 +3381,8 @@ hr {
 }
 
 .contact-form-main #contact-form {
-    padding: 61px 51px 123px 69px;
+    margin-top: -20px;
+    padding: 0px 51px 123px 69px;
     background: #f9f9f9;
     position: relative
 }
@@ -3398,7 +3406,7 @@ hr {
     padding: 10px 25px;
     padding-right: 30px;
     border: 0;
-    color: #a3a3a3;
+    color: #00bd56;
     font-weight: 500;
     text-transform: capitalize;
     border-radius: 0px;
@@ -3559,7 +3567,7 @@ hr {
 }
 
 .single-team:hover .team-caption {
-    background: #ff2121
+    background: #00bd56;
 }
 
 .single-team:hover .team-caption span {
@@ -3606,7 +3614,7 @@ hr {
 
 .contact-animal-owner .contact_text .section_title p {
     font-size: 25px;
-    color: #ffd2c4;
+    color: #00bd56;
     line-height: 40px;
     margin-top: 35px;
     margin-bottom: 50px
