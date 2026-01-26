@@ -9,7 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+        integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
@@ -51,10 +55,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../index.html">Home 1</a>
+                        <a class="nav-link" href="../index.html">Home 1</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index_2.html">Home 2</a>
+                        <a class="nav-link active" href="../home_2/index.html">Home 2</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../about.html">About Us</a>
@@ -86,7 +90,7 @@
     </header>
     <main>
         <!--? Slider Area Start-->
-        <div class="slider-area">
+        <div class="slider-area overlay">
             <div class="slider-active dot-style">
                 <!-- Slider Single -->
                 <div class="single-slider d-flex align-items-center slider-height">
@@ -143,6 +147,7 @@
             </div>
         </div>
         <!-- Slider Area End -->
+
         <!--? Our Services Start -->
         <div class="our-services section-padding30">
             <div class="container">
@@ -403,8 +408,8 @@
                 </div>
             </div>
         </div>
-       
-        <div class="home_blog-area section-padding30">
+
+        <div class="home_blog-area">
             <div class="container">
                 <div class="row justify-content-sm-center">
                     <div class="cl-xl-7 col-lg-8 col-md-10">
@@ -466,12 +471,93 @@
         </div>
         <!-- Blog End -->
         <!--? contact-animal-owner Start -->
-        
+
         <!-- contact-animal-owner End -->
     </main>
-  
+
     <!-- Scroll Up -->
-   
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading"><img src="../images/footer_logo.png" width="200px"
+                            style="margin-left: -12px;" alt=""></h2>
+                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                    <ul class="ftco-footer-social p-0">
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                title="Twitter"><span class="fa fa-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                title="Facebook"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                title="Instagram"><span class="fa fa-instagram"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Latest News</h2>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="img mr-4 rounded" style="background-image: url(../images/image_1.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="img mr-4 rounded" style="background-image: url(../images/image_2.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Quick Links</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html" class="py-2 d-block">Home</a></li>
+                        <li><a href="../about.html" class="py-2 d-block">About</a></li>
+                        <li><a href="../services.html" class="py-2 d-block">Services</a></li>
+                        <li><a href="../pricing.html" class="py-2 d-block">Pricing</a></li>
+                        <li><a href="../blog.html" class="py-2 d-block">Blog</a></li>
+                        <li><a href="../contact.html" class="py-2 d-block">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Have a Questions</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon fa fa-map"></span><span class="text">203 Fake St. Mountain View, San
+                                    Francisco, California, USA</span></li>
+                            <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929
+                                        210</span></a></li>
+                            <li><a href="#"><span class="icon fa fa-paper-plane"></span><span
+                                        class="text">info@yourdomain.com</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+
+                    <p class="copyright">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | <i
+                            class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">petservice</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 
     <!-- JS here -->
 

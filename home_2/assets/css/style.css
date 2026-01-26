@@ -2129,14 +2129,14 @@ hr {
 }
 
 .section-padding30 {
-    padding-top: 200px;
+    padding-top: 100px;
     padding-bottom: 140px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
     .section-padding30 {
-        padding-top: 200px;
-        padding-bottom: 140px
+        padding-top: 100px;
+        padding-bottom: 100px
     }
 }
 
@@ -2169,13 +2169,13 @@ hr {
 }
 
 .section-padding03 {
-    padding-top: 200px;
+    padding-top: 100px;
     padding-bottom: 80px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
     .section-padding03 {
-        padding-top: 200px;
+        padding-top: 100px;
         padding-bottom: 80px
     }
 }
@@ -2787,6 +2787,40 @@ hr {
     height: 920px
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.carousel-inner .carousel-item {
+    box-shadow: none;
+}
+
+.carousel-indicators {
+    box-shadow: none;
+}
+
+#overlay {
+    position: fixed;
+    /* Sit on top of the page content */
+    display: none;
+    /* Hidden by default */
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black background with opacity */
+    z-index: 2;
+    /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer;
+    /* Add a pointer on hover */
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .slider-height {
         height: 700px
@@ -2840,8 +2874,8 @@ hr {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-color: black;
-    filter: brightness(20%);
+    background-color: #00bd56;
+    /* filter: brightness(20%); */
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
@@ -2888,7 +2922,7 @@ hr {
 .slider-area .hero__caption span {
     display: inline-block;
     font-size: 18px;
-    color: #222222;
+    color: white;
     text-transform: normal;
     margin-bottom: 20px
 }
@@ -2896,7 +2930,7 @@ hr {
 .slider-area .hero__caption h1 {
     font-size: 70px;
     font-weight: 900;
-    color: #111111;
+    color: #fff;
     line-height: 1.3;
     margin-bottom: 23px;
     overflow: hidden
@@ -2938,7 +2972,7 @@ hr {
 .slider-area .hero__caption p {
     margin-bottom: 30px;
     padding-right: 155px;
-    color: #776b6a;
+    color: #fff;
     overflow: hidden
 }
 
@@ -2955,8 +2989,10 @@ hr {
 }
 
 .slider-area .hero__caption a {
-    color: #111111;
+    color: #00bd56;
+    /* background-color: #00bd56; */
     font-size: 18px;
+    /* display: inline-block; */
     text-transform: capitalize;
     font-weight: 500;
     display: block;
@@ -3369,8 +3405,9 @@ hr {
     padding: 68px 51px 0px 67px;
     color: #00bd56;
 }
-.contact-form-main .form-tittle h2{
-    
+
+.contact-form-main .form-tittle h2 {
+
     color: black;
 }
 
@@ -4187,7 +4224,7 @@ hr {
     padding-right: 14px;
     line-height: 1;
     margin-bottom: 16px;
-    color: #ff656a;
+    color: #00bd56;
     position: relative
 }
 
@@ -4210,7 +4247,7 @@ hr {
 }
 
 .home_blog-area .single-blogs .blogs-cap h4 {
-    color: #112957;
+    color: black;
     font-size: 24px;
     font-weight: 800;
     line-height: 1.4;
@@ -4243,11 +4280,11 @@ hr {
 }
 
 .home_blog-area .single-blogs:hover .blog-img .practice-icon span {
-    color: #ff2121
+    color: #00bd56;
 }
 
 .home_blog-area .single-blogs:hover .read-more1 {
-    color: #ff2121
+    color: #00bd56;
 }
 
 .latest-blog-area .area-heading {
@@ -4262,7 +4299,7 @@ hr {
 
 .blog_area a:hover,
 .blog_area a :hover {
-    background: -webkit-linear-gradient(131deg, #ff2121 0%, #ff2121 99%);
+    background: -webkit-linear-gradient(131deg, #00bd56 0%, #00bd56 99%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
