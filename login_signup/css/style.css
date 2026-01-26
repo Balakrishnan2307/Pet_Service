@@ -350,10 +350,14 @@ figure {
   -ms-border-radius: 5px;
   margin-top: 25px;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
 }
 
 .form-submit:hover {
-  background: #4292dc;
+  background: white;
+  color: #00bd56;
+  border: 1px solid #00bd56;
+  transition: 0.5s ease-in-out;
 }
 
 #signin {
