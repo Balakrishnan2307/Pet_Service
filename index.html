@@ -44,12 +44,17 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item">
-					<a class="nav-link active" href="index.html">Home 1</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="home_2/index.html">Home 2</a>
-				</li>
+
+				<div class="btn-group">
+					<button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						home
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+						<a class="dropdown-item" href="index.html">Home 1</a>
+						<a class="dropdown-item" href="home_2/index.html">Home 2</a>
+					</div>
+				</div>
 				<li class="nav-item">
 					<a class="nav-link" href="about.html">About Us</a>
 				</li>
@@ -65,9 +70,17 @@
 				<li class="nav-item">
 					<a class="nav-link" href="contact.html">Contact Us</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="./dashboard/index.html">Dashboard</a>
-				</li>
+				<div class="btn-group">
+					<button class="btn dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						Pages
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+						<a class="dropdown-item" href="./dashboard/index.html">Dashboard</a>
+						<a class="dropdown-item" href="login_signup/login.html">Login</a>
+					</div>
+				</div>
+				
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<!-- <a href="login_signup/login.html" class="btn btn-outline-success my-2 my-sm-0" style="margin: 0px 5px;">Sign / Signup</a> -->
@@ -502,10 +515,11 @@
 							<span class="price"><sup>$</sup> <span class="number">79</span> <sub>/mos</sub></span>
 
 							<ul class="pricing-text mb-5">
-								<li><span class="fa fa-check mr-2"></span>5 Dog Walk</li>
-								<li><span class="fa fa-check mr-2"></span>3 Vet Visit</li>
-								<li><span class="fa fa-check mr-2"></span>3 Pet Spa</li>
-								<li><span class="fa fa-check mr-2"></span>Free Supports</li>
+								<li><span class="fa fa-check mr-2"></span>Deep Cleansing Bath</li>
+								<li><span class="fa fa-check mr-2"></span>Brushing & De-shedding
+								</li>
+								<li><span class="fa fa-check mr-2"></span>Ear Cleaning</li>
+								<li><span class="fa fa-check mr-2"></span>Blueberry Facial</li>
 							</ul>
 
 							<a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
@@ -520,10 +534,10 @@
 							<span class="price"><sup>$</sup> <span class="number">109</span> <sub>/mos</sub></span>
 
 							<ul class="pricing-text mb-5">
-								<li><span class="fa fa-check mr-2"></span>5 Dog Walk</li>
-								<li><span class="fa fa-check mr-2"></span>3 Vet Visit</li>
-								<li><span class="fa fa-check mr-2"></span>3 Pet Spa</li>
-								<li><span class="fa fa-check mr-2"></span>Free Supports</li>
+								<li><span class="fa fa-check mr-2"></span>Everything in Full Grooming</li>
+								<li><span class="fa fa-check mr-2"></span>Aromatherapy Spa Bath</li>
+								<li><span class="fa fa-check mr-2"></span>Paw Pad Moisturizing</li>
+								<li><span class="fa fa-check mr-2"></span>Premium Bandana & Cologne</li>
 							</ul>
 
 							<a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
