@@ -342,7 +342,7 @@ figure {
   color: #fff;
   border-bottom: none;
   width: auto;
-  padding: 15px 39px;
+  padding: 10px 39px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -566,14 +566,36 @@ label.valid:after {
   padding-top: 67px;
   padding-bottom: 87px;
 }
-
-.social-login {
-  align-items: center;
-  -moz-align-items: center;
-  -webkit-align-items: center;
-  -o-align-items: center;
-  -ms-align-items: center;
-  margin-top: 80px;
+.form-submit-1{
+  background-color: #00bd56;
+  border: 1px solid #00bd56;
+  border: none;
+  color: white;
+  font-size: 14px;
+  width: 100%;
+  /* margin-top: 10px; */
+}
+.form-submit-1:hover{
+  background-color: white;
+  border: 1px solid #00bd56;
+  /* border: none; */
+  color: #00bd56;
+  /* margin-top: 10px; */
+}
+.form-submit-2 a{
+  background-color: white;
+  border: 1px solid #00bd56;
+  color: #00bd56;
+  width: 100%;
+  padding: 10px;
+}
+.form-submit-2 a:hover{
+  background-color: #00bd56;
+  border: 1px solid #00bd56;
+  /* border: none; */
+  color: white;
+  width: 100%;
+  /* margin-top: 10px; */
 }
 
 .social-label {
