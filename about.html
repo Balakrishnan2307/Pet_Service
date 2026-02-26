@@ -1,545 +1,1871 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
-	<title>Pet Service</title>
-	<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - PawCare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap"
+        rel="stylesheet">
 
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
-		rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F9FAFB;
+            --bg-elevated: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --fg: #111827;
+            --fg-muted: #6B7280;
+            --fg-subtle: #9CA3AF;
+            --accent: #00BD56;
+            --accent-dark: #009644;
+            --accent-glow: rgba(0, 189, 86, 0.15);
+            --accent-soft: rgba(0, 189, 86, 0.08);
+            --border: rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-	<link rel="stylesheet" href="css/animate.css">
+        html {
+            scroll-behavior: smooth;
+        }
 
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="css/magnific-popup.css">
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            overflow-x: hidden;
+        }
 
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="css/jquery.timepicker.css">
+        /* Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0, 189, 86, 0.08), transparent),
+                radial-gradient(circle at 80% 20%, rgba(0, 189, 86, 0.05), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-	<link rel="stylesheet" href="css/flaticon.css">
-	<link rel="stylesheet" href="css/style.css">
-	<style>
-		.navbar {
-			position: fixed;
-			width: 100%;
-			z-index: 999;
-			top: 0;
-			background-color: white;
-		}
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 1.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-		.navbar ul li a {
-			margin-right: 20px;
-			color: black;
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
 
-		}
+        .navbar-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
 
-		ion-icon {
-			background-color: #00bd56;
-			color: #fff;
-			/* padding: 10px; */
-			border: none;
-			font-size: 1.5em;
-		}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--fg);
+        }
 
-		.navbar-toggler {
-			border: none;
-			border-color: #fff;
-			background-color: #00bd56;
-		}
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px var(--accent-glow);
+            transition: transform 0.3s ease;
+        }
 
-		.navbar .navbar-nav .nav-item .active {
-			color: #00bd56;
-			font-weight: 700;
-		}
+        .logo:hover .logo-icon {
+            transform: rotate(-5deg) scale(1.05);
+        }
 
-		.navbar .navbar-nav .nav-item .nav-link:hover {
-			color: #00bd56;
-			font-weight: 700;
-			transform: scale(1.1);
-		}
-	</style>
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            padding: 0.625rem 1rem;
+            color: var(--fg-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--fg);
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-link.active {
+            color: var(--accent);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .rtl-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--fg-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .rtl-toggle:hover {
+            background: rgba(0, 0, 0, 0.06);
+            color: var(--fg);
+        }
+
+        .rtl-toggle.active {
+            background: var(--accent-soft);
+            border-color: rgba(0, 189, 86, 0.3);
+            color: var(--accent);
+        }
+
+        .rtl-toggle svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-cta {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+
+        @media (min-width: 768px) {
+            .btn-cta {
+                display: flex;
+            }
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+            background: var(--accent-dark);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 44px;
+            height: 44px;
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        @media (min-width: 1024px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        .menu-toggle:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+
+        .menu-toggle span {
+            width: 18px;
+            height: 2px;
+            background: var(--fg);
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 7rem 2rem 2rem;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 1rem 0;
+            color: var(--fg);
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-nav-link.active {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 5rem 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                padding: 7rem 2rem;
+            }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            /* min-height: 60vh; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 8rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid rgba(0, 189, 86, 0.2);
+            border-radius: 100px;
+            color: var(--accent);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease forwards;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease 0.1s forwards;
+            opacity: 0;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            color: var(--fg-muted);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid rgba(0, 189, 86, 0.2);
+            border-radius: 100px;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: var(--fg);
+        }
+
+        .section-subtitle {
+            color: var(--fg-muted);
+            font-size: 1.0625rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Story Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .story-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .story-image {
+            position: relative;
+        }
+
+        .story-image-main {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #F3F4F6, #E5E7EB);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .story-image-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: var(--fg-subtle);
+        }
+
+        .story-image-placeholder svg {
+            width: 80px;
+            height: 80px;
+            opacity: 0.5;
+            color: var(--accent);
+        }
+
+        .story-badge {
+            position: absolute;
+            bottom: -1.5rem;
+            right: -1rem;
+            background: var(--accent);
+            color: #fff;
+            padding: 1.25rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        [dir="rtl"] .story-badge {
+            right: auto;
+            left: -1rem;
+        }
+
+        .story-badge-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .story-badge-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .story-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: var(--fg);
+        }
+
+        .story-content p {
+            color: var(--fg-muted);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--fg-muted);
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .value-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .value-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-soft);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .value-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--accent);
+        }
+
+        .value-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--fg);
+        }
+
+        .value-desc {
+            color: var(--fg-muted);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-image {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-image svg {
+            width: 60px;
+            height: 60px;
+            color: var(--fg-subtle);
+            opacity: 0.5;
+        }
+
+        .team-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .team-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--fg);
+        }
+
+        .team-role {
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .team-social a {
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fg-muted);
+            transition: all 0.2s ease;
+        }
+
+        .team-social a:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .team-social svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Timeline */
+        .timeline-wrapper {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--border);
+        }
+
+        [dir="rtl"] .timeline-wrapper::before {
+            left: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-wrapper::before {
+                left: 20px;
+            }
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+            padding-right: 3rem;
+        }
+
+        [dir="rtl"] .timeline-item {
+            padding-right: 0;
+            padding-left: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 3rem;
+        }
+
+        [dir="rtl"] .timeline-item:nth-child(even) {
+            padding-left: 0;
+            padding-right: 3rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+
+            [dir="rtl"] .timeline-item,
+            [dir="rtl"] .timeline-item:nth-child(even) {
+                padding-left: 0;
+                padding-right: 50px;
+            }
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        [dir="rtl"] .timeline-dot {
+            right: auto;
+            left: -8px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -8px;
+            right: auto;
+        }
+
+        [dir="rtl"] .timeline-item:nth-child(even) .timeline-dot {
+            left: auto;
+            right: -8px;
+        }
+
+        @media (max-width: 768px) {
+
+            .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 12px;
+                right: auto;
+            }
+
+            [dir="rtl"] .timeline-dot,
+            [dir="rtl"] .timeline-item:nth-child(even) .timeline-dot {
+                right: 12px;
+                left: auto;
+            }
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--fg);
+        }
+
+        .timeline-desc {
+            color: var(--fg-muted);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 32px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .cta-section {
+                margin: 2rem auto;
+                max-width: 1200px;
+            }
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1), transparent 50%);
+        }
+
+        .cta-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.0625rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: #fff;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Newsletter Strip */
+        .footer-newsletter {
+            border-bottom: 1px solid var(--border-dark);
+            padding: 3rem 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            /* Slight contrast */
+        }
+
+        .newsletter-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .newsletter-grid {
+                grid-template-columns: 1fr 1.5fr;
+            }
+        }
+
+        .newsletter-content h3 {
+            font-family: 'Space Grotesk';
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9375rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-btn {
+            padding: 0.875rem 1.5rem;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--accent-light);
+        }
+
+        /* Footer Main Grid */
+        .footer-main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-main {
+                grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            }
+        }
+
+        /* Column 1: Brand & Contact */
+        .footer-brand {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-brand-icon svg {
+            width: 22px;
+            height: 22px;
+            color: #fff;
+        }
+
+        .footer-brand-text {
+            font-family: 'Space Grotesk';
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer-brand-text span {
+            color: var(--accent);
+        }
+
+        .footer-desc {
+            color: #9CA3AF;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+            color: #9CA3AF;
+        }
+
+        .contact-list svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9CA3AF;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Columns 2-4: Links */
+        .footer-title {
+            font-family: 'Space Grotesk';
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            margin-top: 30px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #9CA3AF;
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        [dir="rtl"] .footer-links a:hover {
+            transform: translateX(-5px);
+        }
+
+        /* Bottom Bar */
+        .footer-bottom {
+            border-top: 1px solid var(--border-dark);
+            padding: 2rem 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .bottom-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: start;
+            }
+        }
+
+        .copyright {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .copyright a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .legal-links a {
+            color: #6B7280;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .legal-links a:hover {
+            color: #fff;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Focus States */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            cursor: pointer;
+        }
+
+        .dropdown-arrow {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            min-width: 240px;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [dir="rtl"] .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--fg-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: var(--accent-soft);
+            color: var(--fg);
+        }
+
+        .dropdown-item svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent);
+        }
+    </style>
 </head>
 
 <body>
+    <div class="bg-pattern"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-inner">
+            <a href="#" class="logo" aria-label="PawCare Home">
+                <img src="images/logo.png" alt="" width="200px">
+
+            </a>
+
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#" class="nav-link dropdown-trigger">
+                        Home
+                        <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="index.html" class="dropdown-item">
+
+                            Home 1
+                        </a>
+                        <a href="index_2.html" class="dropdown-item">
+
+                            Home 2
+                        </a>
+
+                    </div>
+                </li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="service.html" class="nav-link">Service</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="rtl-toggle" id="rtlToggle" aria-label="Toggle RTL mode">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
+                        <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+                        <path d="M12 20v2" />
+                        <path d="M12 14v2" />
+                        <path d="M12 8v2" />
+                        <path d="M12 2v2" />
+                    </svg>
+                    <span>RTL</span>
+                </button>
+
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <a href="index.html" class="mobile-nav-link active">Home 1</a>
+        <a href="index.html" class="mobile-nav-link">Home 2</a>
+        <a href="about.html" class="mobile-nav-link">About </a>
+        <a href="blog.html" class="mobile-nav-link">Blog</a>
+        <a href="pricing.html" class="mobile-nav-link">Pricing</a>
+        <a href="service.html" class="mobile-nav-link">Service</a>
+        <a href="contact.html" class="mobile-nav-link">Contact</a>
+        <a href="dashboard.html" class="mobile-nav-link">Dashboard</a>
+        <a href="login.html" class="mobile-nav-link">Login</a>
+
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="4" />
+                </svg>
+                Est. 2016
+            </div>
+            <h1 class="hero-title">Dedicated to <span>Pet Happiness</span></h1>
+            <p class="hero-subtitle">We're a team of passionate pet lovers committed to providing exceptional care for
+                your furry family members. Every tail wag is our mission.</p>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story">
+            <div class="container">
+                <div class="story-grid">
+                    <div class="story-image reveal">
+                        <div class="story-image-main">
+                            <div class="story-image-placeholder">
+                                <img src="../images/about-2.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="story-badge">
+                            <div class="story-badge-value">8+</div>
+                            <div class="story-badge-label">Years of Trust</div>
+                        </div>
+                    </div>
+
+                    <div class="story-content reveal">
+                        <h2>Our Story</h2>
+                        <p>PawCare was founded in 2016 by Dr. Sarah Mitchell and Michael Chen, two lifelong friends who
+                            shared a deep passion for animal welfare. What started as a small veterinary clinic has
+                            grown into a comprehensive pet care center serving thousands of families.</p>
+                        <p>Our journey began with a simple belief: every pet deserves to be treated with the same love
+                            and care we give our own. This philosophy drives everything we do, from our state-of-the-art
+                            medical facilities to our cozy boarding suites.</p>
+
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value">15K+</div>
+                                <div class="stat-label">Pets Cared For</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">50+</div>
+                                <div class="stat-label">Team Members</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Service Types</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">4.9</div>
+                                <div class="stat-label">Avg. Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values" style="background: rgba(0,0,0,0.02);">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-badge">Our Values</div>
+                    <h2 class="section-title">What We Stand For</h2>
+                    <p class="section-subtitle">These core principles guide every decision we make and every pet we care
+                        for.</p>
+                </div>
+
+                <div class="values-grid">
+
+                    <div class="value-card reveal">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <h3 class="value-title">Excellence in Care</h3>
+                        <p class="value-desc">We maintain the highest standards in veterinary medicine, grooming, and
+                            boarding services. Quality is non-negotiable.</p>
+                    </div>
+
+                    <div class="value-card reveal">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <h3 class="value-title">Community Focus</h3>
+                        <p class="value-desc">We're proud to be part of this community. Through adoption events and
+                            education, we give back to pet lovers everywhere.</p>
+                    </div>
+
+                    <div class="value-card reveal">
+                        <div class="value-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg>
+                        </div>
+                        <h3 class="value-title">Transparency</h3>
+                        <p class="value-desc">No hidden fees or surprises. We believe in open communication with pet
+                            parents about treatments, costs, and care plans.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-badge">Our Team</div>
+                    <h2 class="section-title">Meet the Experts</h2>
+                    <p class="section-subtitle">A dedicated team of professionals who treat your pets like their own
+                        family.</p>
+                </div>
+
+                <div class="team-grid">
+                    
+
+                    <div class="team-card reveal">
+                        <div class="team-image">
+                            <img src="../images/person_3.jpg" alt="">
+                        </div>
+                        <div class="team-content">
+                            <h3 class="team-name">Michael Chen</h3>
+                            <p class="team-role">Co-Founder & CEO</p>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                        <rect x="2" y="9" width="4" height="12" />
+                                        <circle cx="4" cy="4" r="2" />
+                                    </svg>
+                                </a>
+                                <a href="#" aria-label="Twitter">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card reveal">
+                        <div class="team-image">
+                            <img src="../images/person_4.jpg" alt="">
+                        </div>
+                        <div class="team-content">
+                            <h3 class="team-name">Dr. Emily Rodriguez</h3>
+                            <p class="team-role">Senior Veterinarian</p>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                        <rect x="2" y="9" width="4" height="12" />
+                                        <circle cx="4" cy="4" r="2" />
+                                    </svg>
+                                </a>
+                                <a href="#" aria-label="Twitter">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-card reveal">
+                        <div class="team-image">
+                            <img src="../images/person_1.jpg" alt="">
+                        </div>
+                        <div class="team-content">
+                            <h3 class="team-name">James Wilson</h3>
+                            <p class="team-role">Head of Grooming</p>
+                            <div class="team-social">
+                                <a href="#" aria-label="LinkedIn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                        <rect x="2" y="9" width="4" height="12" />
+                                        <circle cx="4" cy="4" r="2" />
+                                    </svg>
+                                </a>
+                                <a href="#" aria-label="Twitter">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline" style="background: rgba(0,0,0,0.02);">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-badge">Our Journey</div>
+                    <h2 class="section-title">Milestones</h2>
+                    <p class="section-subtitle">Key moments that shaped PawCare into what it is today.</p>
+                </div>
+
+                <div class="timeline-wrapper">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2016</span>
+                            <h3 class="timeline-title">The Beginning</h3>
+                            <p class="timeline-desc">PawCare opened its doors as a small veterinary clinic with a team
+                                of just 5 people.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2018</span>
+                            <h3 class="timeline-title">Expanding Services</h3>
+                            <p class="timeline-desc">Added professional grooming and pet boarding facilities to our
+                                service offerings.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2020</span>
+                            <h3 class="timeline-title">Community Impact</h3>
+                            <p class="timeline-desc">Launched our adoption program, finding homes for over 500 rescue
+                                pets in the first year.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2022</span>
+                            <h3 class="timeline-title">Award Recognition</h3>
+                            <p class="timeline-desc">Named "Best Pet Care Center" by Pet Excellence Magazine for
+                                outstanding service.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-year">2024</span>
+                            <h3 class="timeline-title">New Heights</h3>
+                            <p class="timeline-desc">Expanded to a 50+ team members and opened our second location to
+                                serve more families.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <div class="cta-section reveal">
+            <h2 class="cta-title">Ready to Experience PawCare?</h2>
+            <p class="cta-text">Join thousands of happy pet parents who trust us with their beloved companions. Book
+                your first visit today.</p>
+            <a href="#" class="cta-btn">
+                Book an Appointment
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </a>
+        </div>
+    </main>
 
 
-	<nav class="navbar navbar-expand-lg">
-		<a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="" width="250px"></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<!-- <span class="navbar-toggler-icon"></span> -->
-			<ion-icon name="menu-outline"></ion-icon>
-		</button>
+    <footer>
+        <!-- Newsletter Strip -->
+        <div class="footer-newsletter">
+            <div class="newsletter-grid">
+                <div class="newsletter-content">
+                    <h3>Subscribe to our Newsletter</h3>
+                    <p>Get the latest updates on pet care tips and special offers.</p>
+                </div>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="index.html">Home 1</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="home_2/index.html">Home 2</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="about.html">About Us</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="services.html">Services</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="pricing.html">Pricing</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="blog.html">Blog</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="contact.html">Contact Us</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="./dashboard/index.html">Dashboard</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="./login_signup/login.html">Login</a>
-				</li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0">
+        <!-- Main Footer Content -->
+        <div class="footer-main">
+            <!-- Column 1: Brand & Contact -->
+            <div>
+                <div class="footer-brand">
+                    <a href="index.html">
+                        <img src="images/logo.png" width="200px" alt="">
+                    </a>
+                </div>
+                <p class="footer-desc">Dedicated to providing premium, compassionate care for your beloved companions.
+                    Your pet's happiness is our mission.</p>
 
-				<a href="RTL/rtl_blog.html" class="btn btn-outline-success my-2 my-sm-0" type="submit">RTL</a>
-			</form>
-		</div>
-	</nav>
-	<!-- END nav -->
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text align-items-end">
-				<div class="col-md-9 ftco-animate pb-5">
-					<p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home <i
-									class="ion-ios-arrow-forward"></i></a></span> <span>About us <i
-								class="ion-ios-arrow-forward"></i></span></p>
-					<h1 class="mb-0 bread">About Us</h1>
-				</div>
-			</div>
-		</div>
-	</section>
+                <ul class="contact-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        123 Pet Street, New York, NY 10001
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                        +1 (555) 123-4567
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        hello@pawcare.com
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        Mon-Sat: 8AM - 8PM
+                    </li>
+                </ul>
 
-	<section class="ftco-section ftco-no-pt ftco-no-pb">
-		<div class="container">
-			<div class="row d-flex no-gutters">
-				<div class="col-md-5 d-flex">
-					<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0"
-						style="background-image:url(images/about-1.jpg);">
-					</div>
-				</div>
-				<div class="col-md-7 pl-md-5 py-md-5">
-					<div class="heading-section pt-md-5">
-						<h2 class="mb-4">Why Choose Us</h2>
-					</div>
-					<div class="row">
-						<div class="col-md-6 services-2 w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"><span
-									class="flaticon-stethoscope"></span></div>
-							<div class="text pl-3">
-								<h4>Care Advices</h4>
-								<p>Far far away, behind the word mountains, far from the countries.</p>
-							</div>
-						</div>
-						<div class="col-md-6 services-2 w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"><span
-									class="flaticon-customer-service"></span></div>
-							<div class="text pl-3">
-								<h4>Customer Supports</h4>
-								<p>Far far away, behind the word mountains, far from the countries.</p>
-							</div>
-						</div>
-						<div class="col-md-6 services-2 w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"><span
-									class="flaticon-emergency-call"></span></div>
-							<div class="text pl-3">
-								<h4>Emergency Services</h4>
-								<p>Far far away, behind the word mountains, far from the countries.</p>
-							</div>
-						</div>
-						<div class="col-md-6 services-2 w-100 d-flex">
-							<div class="icon d-flex align-items-center justify-content-center"><span
-									class="flaticon-veterinarian"></span></div>
-							<div class="text pl-3">
-								<h4>Veterinary Help</h4>
-								<p>Far far away, behind the word mountains, far from the countries.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                        </svg></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg></a>
+                </div>
+            </div>
 
-	<section class="ftco-counter" id="section-counter">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-					<div class="block-18 text-center">
-						<div class="text">
-							<strong class="number" data-number="50">0</strong>
-						</div>
-						<div class="text">
-							<span>Customer</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-					<div class="block-18 text-center">
-						<div class="text">
-							<strong class="number" data-number="8500">0</strong>
-						</div>
-						<div class="text">
-							<span>Professionals</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-					<div class="block-18 text-center">
-						<div class="text">
-							<strong class="number" data-number="20">0</strong>
-						</div>
-						<div class="text">
-							<span>Products</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-					<div class="block-18 text-center">
-						<div class="text">
-							<strong class="number" data-number="50">0</strong>
-						</div>
-						<div class="text">
-							<span>Pets Hosted</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+            <!-- Column 2: Quick Links -->
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
 
-	<section class="ftco-section bg-light ftco-faqs">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 order-md-last">
-					<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0"
-						style="background-image:url(images/about.jpg);">
-						<a href="https://vimeo.com/45830194"
-							class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-							<span class="fa fa-play"></span>
-						</a>
-					</div>
-					<div class="d-flex mt-3">
-						<div class="img img-2 mr-md-2" style="background-image:url(images/about-2.jpg);"></div>
-						<div class="img img-2 ml-md-2" style="background-image:url(images/about-3.jpg);"></div>
-					</div>
-				</div>
+            <!-- Column 3: Services -->
+            <div>
+                <h4 class="footer-title">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Grooming</a></li>
+                    <li><a href="#">Veterinary Care</a></li>
+                    <li><a href="#">Pet Boarding</a></li>
+                    <li><a href="#">Dog Walking</a></li>
+                    <li><a href="#">Training</a></li>
+                    <li><a href="#">Pet Sitting</a></li>
+                </ul>
+            </div>
 
-				<div class="col-lg-6">
-					<div class="heading-section mb-5 mt-5 mt-lg-0">
-						<h2 class="mb-3">Frequently Asks Questions</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-							there live the blind texts.</p>
-					</div>
-					<div id="accordion" class="myaccordion w-100" aria-multiselectable="true">
-						<div class="card">
-							<div class="card-header p-0" id="headingOne">
-								<h2 class="mb-0">
-									<button href="#collapseOne"
-										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
-										data-parent="#accordion" data-toggle="collapse" aria-expanded="true"
-										aria-controls="collapseOne">
-										<p class="mb-0">How to train your pet dog</p>
-										<i class="fa" aria-hidden="true"></i>
-									</button>
-								</h2>
-							</div>
-							<div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
-								<div class="card-body py-3 px-0">
-									<ol>
-										<li>Far far away, behind the word mountains</li>
-										<li>Consonantia, there live the blind texts</li>
-										<li>When she reached the first hills of the Italic Mountains</li>
-										<li>Bookmarksgrove, the headline of Alphabet Village</li>
-										<li>Separated they live in Bookmarksgrove right</li>
-									</ol>
-								</div>
-							</div>
-						</div>
+            <!-- Column 4: Legal -->
+            <div>
+                <h4 class="footer-title">Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
 
-						<div class="card">
-							<div class="card-header p-0" id="headingTwo" role="tab">
-								<h2 class="mb-0">
-									<button href="#collapseTwo"
-										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
-										data-parent="#accordion" data-toggle="collapse" aria-expanded="false"
-										aria-controls="collapseTwo">
-										<p class="mb-0">How to manage your pets</p>
-										<i class="fa" aria-hidden="true"></i>
-									</button>
-								</h2>
-							</div>
-							<div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="card-body py-3 px-0">
-									<ol>
-										<li>Far far away, behind the word mountains</li>
-										<li>Consonantia, there live the blind texts</li>
-										<li>When she reached the first hills of the Italic Mountains</li>
-										<li>Bookmarksgrove, the headline of Alphabet Village</li>
-										<li>Separated they live in Bookmarksgrove right</li>
-									</ol>
-								</div>
-							</div>
-						</div>
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="bottom-inner">
+                <div class="copyright">
+                    &copy; 2026 <a href="#">Pet Service</a>. All Rights Reserved.
+                </div>
 
-						<div class="card">
-							<div class="card-header p-0" id="headingThree" role="tab">
-								<h2 class="mb-0">
-									<button href="#collapseThree"
-										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
-										data-parent="#accordion" data-toggle="collapse" aria-expanded="false"
-										aria-controls="collapseThree">
-										<p class="mb-0">What is the best grooming for your pets</p>
-										<i class="fa" aria-hidden="true"></i>
-									</button>
-								</h2>
-							</div>
-							<div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="card-body py-3 px-0">
-									<ol>
-										<li>Far far away, behind the word mountains</li>
-										<li>Consonantia, there live the blind texts</li>
-										<li>When she reached the first hills of the Italic Mountains</li>
-										<li>Bookmarksgrove, the headline of Alphabet Village</li>
-										<li>Separated they live in Bookmarksgrove right</li>
-									</ol>
-								</div>
-							</div>
-						</div>
-
-						<div class="card">
-							<div class="card-header p-0" id="headingFour" role="tab">
-								<h2 class="mb-0">
-									<button href="#collapseFour"
-										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
-										data-parent="#accordion" data-toggle="collapse" aria-expanded="false"
-										aria-controls="collapseFour">
-										<p class="mb-0">What are those requirements for sitting pets</p>
-										<i class="fa" aria-hidden="true"></i>
-									</button>
-								</h2>
-							</div>
-							<div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="card-body py-3 px-0">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and
-										Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
-										right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                <div class="legal-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
+    <script>
+        // Initialize state
+        let isRtl = false;
+        let isMenuOpen = false;
 
-	<section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img"
-		style="background-image: url(images/bg_3.jpg);">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row d-md-flex justify-content-end">
-				<div class="col-md-12 col-lg-12 half p-3 py-5 pl-lg-5 ftco-animate">
-					<h2 class="mb-4">Free Consultation</h2>
-					<form action="#" class="appointment">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<div class="form-field">
-										<div class="select-wrap">
-											<div class="icon"><span class="fa fa-chevron-down"></span></div>
-											<select name="" id="" class="form-control">
-												<option value="">Select services</option>
-												<option value="">Cat Sitting</option>
-												<option value="">Dog Walk</option>
-												<option value="">Pet Spa</option>
-												<option value="">Pet Grooming</option>
-												<option value="">Pet Daycare</option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Your Name">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Vehicle number">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="input-wrap">
-										<div class="icon"><span class="fa fa-calendar"></span></div>
-										<input type="text" class="form-control appointment_date" placeholder="Date">
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="input-wrap">
-										<div class="icon"><span class="fa fa-clock-o"></span></div>
-										<input type="text" class="form-control appointment_time" placeholder="Time">
-									</div>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<textarea name="" id="" cols="30" rows="7" class="form-control"
-										placeholder="Message"></textarea>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<input type="submit" value="Send message" class="btn btn-primary py-3 px-4">
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+        // DOM Elements
+        const html = document.documentElement;
+        const navbar = document.querySelector('.navbar');
+        const rtlToggle = document.getElementById('rtlToggle');
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-					<h2 class="footer-heading"><img src="./images/footer_logo.png" width="200px"
-							style="margin-left: -12px;" alt=""></h2>
-					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-					<ul class="ftco-footer-social p-0">
-						<li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
-								title="Twitter"><span class="fa fa-twitter"></span></a></li>
-						<li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
-								title="Facebook"><span class="fa fa-facebook"></span></a></li>
-						<li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
-								title="Instagram"><span class="fa fa-instagram"></span></a></li>
-					</ul>
-				</div>
-				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-					<h2 class="footer-heading">Latest News</h2>
-					<div class="block-21 mb-4 d-flex">
-						<a class="img mr-4 rounded" style="background-image: url(images/image_1.jpg);"></a>
-						<div class="text">
-							<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-							<div class="meta">
-								<div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-								<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-								<div><a href="#"><span class="icon-chat"></span> 19</a></div>
-							</div>
-						</div>
-					</div>
-					<div class="block-21 mb-4 d-flex">
-						<a class="img mr-4 rounded" style="background-image: url(images/image_2.jpg);"></a>
-						<div class="text">
-							<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-							<div class="meta">
-								<div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-								<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-								<div><a href="#"><span class="icon-chat"></span> 19</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
+        // RTL Toggle
+        rtlToggle.addEventListener('click', () => {
+            isRtl = !isRtl;
+            html.dir = isRtl ? 'rtl' : 'ltr';
+            html.lang = isRtl ? 'ar' : 'en';
+            rtlToggle.classList.toggle('active', isRtl);
 
-				<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
-					<h2 class="footer-heading">Quick Links</h2>
-					<ul class="list-unstyled">
-						<li><a href="index.html" class="py-2 d-block">Home</a></li>
-						<li><a href="about.html" class="py-2 d-block">About</a></li>
-						<li><a href="services.html" class="py-2 d-block">Services</a></li>
-						<li><a href="pricing.html" class="py-2 d-block">Pricing</a></li>
-						<li><a href="blog.html" class="py-2 d-block">Blog</a></li>
-						<li><a href="contact.html" class="py-2 d-block">Contact</a></li>
-					</ul>
-				</div>
-				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-					<h2 class="footer-heading">Have a Questions</h2>
-					<div class="block-23 mb-3">
-						<ul>
-							<li><span class="icon fa fa-map"></span><span class="text">203 Fake St. Mountain View, San
-									Francisco, California, USA</span></li>
-							<li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929
-										210</span></a></li>
-							<li><a href="#"><span class="icon fa fa-paper-plane"></span><span
-										class="text">info@yourdomain.com</span></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row mt-5">
-				<div class="col-md-12 text-center">
+            rtlToggle.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                rtlToggle.style.transform = 'scale(1)';
+            }, 100);
+        });
 
-					<p class="copyright">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | <i
-							class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-							target="_blank">Petservice</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+        // Mobile Menu Toggle
+        menuToggle.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            menuToggle.classList.toggle('active', isMenuOpen);
+            mobileMenu.classList.toggle('active', isMenuOpen);
+            menuToggle.setAttribute('aria-expanded', isMenuOpen);
+            mobileMenu.setAttribute('aria-hidden', !isMenuOpen);
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        });
 
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
 
+        // Scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }, { passive: true });
 
+        // Scroll Reveal Animation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
 
-	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-				stroke="#F96D00" />
-		</svg></div>
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
 
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script>
-	<script src="js/jquery.waypoints.min.js"></script>
-	<script src="js/jquery.stellar.min.js"></script>
-	<script src="js/jquery.animateNumber.min.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/jquery.timepicker.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="js/google-map.js"></script>
-	<script src="js/main.js"></script>
-	<!-- icon js files -->
-	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
 </body>
 
 </html>

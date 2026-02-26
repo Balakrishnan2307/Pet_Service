@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawCare - Home 2</title>
+    <title>Professional Grooming Service - PawCare</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +15,8 @@
     <style>
         :root {
             --bg: #F9FAFB;
-            --bg-alt: #FFFFFF;
-            --bg-dark: #111827;
+            --bg-elevated: #FFFFFF;
+            --bg-card: #FFFFFF;
             --fg: #111827;
             --fg-muted: #6B7280;
             --fg-subtle: #9CA3AF;
@@ -25,10 +25,10 @@
             --accent-glow: rgba(0, 189, 86, 0.15);
             --accent-soft: rgba(0, 189, 86, 0.08);
             --border: rgba(0, 0, 0, 0.06);
-            --border-dark: rgba(255, 255, 255, 0.1);
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         * {
@@ -50,6 +50,16 @@
 
         .font-display {
             font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0, 189, 86, 0.08), transparent),
+                radial-gradient(circle at 0% 80%, rgba(0, 189, 86, 0.05), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Navbar */
@@ -98,10 +108,6 @@
             box-shadow: 0 4px 12px var(--accent-glow);
         }
 
-        .logo:hover .logo-icon {
-            transform: rotate(-5deg) scale(1.05);
-        }
-
         .logo-text {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
@@ -115,7 +121,7 @@
         .nav-links {
             display: none;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
             list-style: none;
         }
 
@@ -287,49 +293,25 @@
             z-index: 1;
         }
 
-        section {
-            padding: 5rem 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            section {
-                padding: 7rem 2rem;
-            }
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        /* Hero Section (Split Layout) */
-        .hero-split {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            align-items: center;
-            padding-top: 8rem;
-        }
-
-        @media (min-width: 1024px) {
-            .hero-split {
-                grid-template-columns: 1fr 1fr;
-                gap: 4rem;
-            }
-        }
-
-        .hero-content {
+        /* Hero Section */
+        .hero {
+            padding: 10rem 1.5rem 4rem;
             text-align: center;
+            position: relative;
         }
 
-        @media (min-width: 1024px) {
-            .hero-content {
-                text-align: start;
-            }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(180deg, rgba(0, 189, 86, 0.05) 0%, transparent 100%);
+            pointer-events: none;
         }
 
-        .hero-badge {
+        .badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -342,7 +324,6 @@
             font-weight: 600;
             margin-bottom: 1.5rem;
             box-shadow: var(--shadow-sm);
-            animation: fadeInDown 0.8s ease forwards;
         }
 
         .hero-title {
@@ -350,566 +331,360 @@
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             line-height: 1.1;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease 0.1s forwards;
-            opacity: 0;
-        }
-
-        .hero-title span {
-            color: var(--accent);
+            margin-bottom: 1rem;
         }
 
         .hero-desc {
-            color: var(--fg-muted);
             font-size: 1.125rem;
+            color: var(--fg-muted);
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.7;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
         }
 
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
-            opacity: 0;
-        }
-
-        @media (min-width: 1024px) {
-            .hero-actions {
-                justify-content: flex-start;
-            }
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: var(--accent);
-            color: #fff;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px var(--accent-glow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            background: var(--accent-dark);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--fg);
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-soft);
-        }
-
-        .hero-media {
-            position: relative;
-            animation: fadeIn 1s ease 0.4s forwards;
-            opacity: 0;
-        }
-
-        .hero-img-box {
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-img-box svg {
-            width: 100px;
-            height: 100px;
-            color: var(--fg-subtle);
-            opacity: 0.3;
-        }
-
-        .hero-float-card {
-            position: absolute;
-            background: white;
-            padding: 1rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .hero-float-card.top-left {
-            top: 10%;
-            left: -10%;
-            animation-delay: 0s;
-        }
-
-        .hero-float-card.bottom-right {
-            bottom: 10%;
-            right: -10%;
-            animation-delay: 2s;
-        }
-
-        @media (max-width: 1024px) {
-            .hero-float-card {
-                display: none;
-            }
-        }
-
-        .float-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .float-icon.green {
-            background: var(--accent-soft);
-            color: var(--accent);
-        }
-
-        .float-icon.orange {
-            background: rgba(245, 158, 11, 0.1);
-            color: #F59E0B;
-        }
-
-        .float-text div:first-child {
-            font-size: 0.6875rem;
-            color: var(--fg-muted);
-        }
-
-        .float-text div:last-child {
-            font-family: 'Space Grotesk';
-            font-weight: 700;
-        }
-
-        /* Logo Cloud */
-        .logo-cloud {
-            padding: 4rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo-cloud-title {
-            text-align: center;
-            font-size: 0.875rem;
-            color: var(--fg-subtle);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .logo-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo-grid:hover {
-            opacity: 0.8;
-        }
-
-        .logo-item {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--fg-muted);
-        }
-
-        /* Features Grid */
-        .features-grid {
+        /* Content Layout */
+        .content-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr 350px;
+                padding: 0 2rem 4rem;
+            }
+        }
+
+        /* Main Column */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .section-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
         }
 
         @media (min-width: 768px) {
-            .features-grid {
+            .section-block {
+                padding: 2.5rem;
+            }
+        }
+
+        .block-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .block-title svg {
+            width: 28px;
+            height: 28px;
+            color: var(--accent);
+        }
+
+        .text-content p {
+            color: var(--fg-muted);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .text-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Service Image Placeholder */
+        .service-image-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .service-image-placeholder svg {
+            width: 64px;
+            height: 64px;
+            color: var(--fg-subtle);
+            opacity: 0.5;
+        }
+
+        /* Pricing Cards within Content */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .pricing-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (min-width: 1024px) {
-            .features-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .pricing-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        .feature-card {
-            background: white;
+        /* Stack in sidebar layout */
+
+        .price-card {
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
+            border-radius: 16px;
+            padding: 1.5rem;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-            z-index: 1;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: transparent;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-soft);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            background: var(--accent);
-        }
-
-        .feature-icon svg {
-            width: 24px;
-            height: 24px;
-            color: var(--accent);
-            transition: color 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon svg {
-            color: #fff;
-        }
-
-        .feature-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-desc {
-            color: var(--fg-muted);
-            font-size: 0.9375rem;
-            line-height: 1.6;
-        }
-
-        /* About Split */
-        .about-split {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        @media (min-width: 1024px) {
-            .about-split {
-                grid-template-columns: 1.2fr 1fr;
-            }
-        }
-
-        .about-images {
-            position: relative;
-        }
-
-        .about-img-main {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .price-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
 
-        .about-img-main svg {
-            width: 60px;
-            height: 60px;
-            color: var(--fg-subtle);
-            opacity: 0.3;
+        .price-card.featured {
+            border-color: var(--accent);
+            background: var(--accent-soft);
         }
 
-        .about-img-float {
+        .price-card.featured::before {
+            content: 'Popular';
             position: absolute;
-            width: 50%;
-            bottom: -2rem;
-            right: -1rem;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
-            text-align: center;
+            top: -10px;
+            right: 20px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
         }
 
-        [dir="rtl"] .about-img-float {
+        [dir="rtl"] .price-card.featured::before {
             right: auto;
-            left: -1rem;
+            left: 20px;
         }
 
-        .about-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1rem;
-        }
-
-        .stat h4 {
-            font-family: 'Space Grotesk';
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .stat p {
-            font-size: 0.75rem;
-            color: var(--fg-muted);
-        }
-
-        .about-content h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .about-content h2 span {
-            color: var(--accent);
-        }
-
-        .about-content p {
-            color: var(--fg-muted);
-            font-size: 1.0625rem;
-            line-height: 1.7;
+        .price-header {
             margin-bottom: 1rem;
         }
 
-        /* Team Grid */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+        .price-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.125rem;
         }
 
-        @media (min-width: 768px) {
-            .team-grid {
-                grid-template-columns: repeat(4, 1fr);
+        .price-amount {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .price-amount span {
+            font-size: 0.875rem;
+            color: var(--fg-muted);
+            font-weight: 400;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .price-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--fg-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-features svg {
+            width: 14px;
+            height: 14px;
+            color: var(--accent);
+        }
+
+        /* Features List */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        .team-card {
-            background: white;
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-soft);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+        }
+
+        .feature-text h4 {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-bottom: 0.125rem;
+        }
+
+        .feature-text p {
+            font-size: 0.8125rem;
+            color: var(--fg-muted);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 1.5rem;
-            text-align: center;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 100px;
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--fg);
+        }
+
+        .form-input,
+        .form-select {
+            padding: 0.75rem 1rem;
+            background: #F9FAFB;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 14px var(--accent-glow);
+            margin-top: 0.5rem;
         }
 
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+        .book-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
         }
 
-        .team-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .team-avatar svg {
-            width: 40px;
-            height: 40px;
-            color: var(--fg-subtle);
-        }
-
-        .team-name {
-            font-family: 'Space Grotesk';
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .team-role {
-            font-size: 0.8125rem;
+        .contact-icon svg {
+            width: 16px;
+            height: 16px;
             color: var(--accent);
         }
 
-        /* Dark Stats Section */
-        .dark-section {
-            background: var(--bg-dark);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dark-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 189, 86, 0.15), transparent 60%);
-            pointer-events: none;
-        }
-
-        .dark-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .dark-stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .dark-stat {
-            position: relative;
-            z-index: 1;
-        }
-
-        .dark-stat-value {
-            font-family: 'Space Grotesk';
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .dark-stat-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9375rem;
-        }
-
-        /* CTA Section */
-        .cta-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            align-items: center;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 3rem 2rem;
-            box-shadow: var(--shadow-sm);
-        }
-
-        @media (min-width: 768px) {
-            .cta-grid {
-                grid-template-columns: 1fr 1fr;
-                padding: 3rem;
-            }
-        }
-
-        .cta-content h2 {
-            font-family: 'Space Grotesk';
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .cta-content p {
+        .contact-text {
+            font-size: 0.875rem;
             color: var(--fg-muted);
-            margin-bottom: 1.5rem;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+        .contact-text strong {
+            display: block;
+            color: var(--fg);
+            font-weight: 500;
         }
 
-        .app-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: transform 0.2s ease;
-        }
-
-        .app-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .app-btn svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .app-btn-text {
-            text-align: start;
-        }
-
-        .app-btn-text div:first-child {
-            font-size: 0.625rem;
-            opacity: 0.7;
-        }
-
-        .app-btn-text div:last-child {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        /* =========================================
-       REDESIGNED FOOTER STYLES
-    ========================================= */
+        /* Footer */
         footer {
-            background: var(--bg-dark);
+            background: #111827;
             color: #fff;
             position: relative;
             z-index: 1;
@@ -1184,73 +959,7 @@
             color: #fff;
         }
 
-        .payment-methods {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .payment-icon {
-            width: 40px;
-            height: 26px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.625rem;
-            font-weight: 700;
-            color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
+        /* Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -1262,10 +971,11 @@
             transform: translateY(0);
         }
 
-        /* Utils */
+        /* Focus & Reduced Motion */
         a:focus-visible,
         button:focus-visible,
-        input:focus-visible {
+        input:focus-visible,
+        select:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
         }
@@ -1283,7 +993,6 @@
         /* Dropdown */
         .dropdown {
             position: relative;
-            /* background-color: white; */
         }
 
         .dropdown-trigger {
@@ -1328,7 +1037,6 @@
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
-            background-color: white;
         }
 
         .dropdown-item {
@@ -1357,7 +1065,7 @@
 </head>
 
 <body>
-    <!-- Navbar -->
+    <div class="bg-pattern"></div>
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-inner">
             <a href="#" class="logo" aria-label="PawCare Home">
@@ -1431,245 +1139,250 @@
         <a href="login.html" class="mobile-nav-link">Login</a>
     </div>
 
+
+
     <main>
-        <!-- Hero Split Layout -->
-        <section class="hero-split container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="4" />
-                    </svg>
-                    Premium Pet Care
-                </div>
-                <h1 class="hero-title">Caring for your <span>best friends</span></h1>
-                <p class="hero-desc">Professional grooming, veterinary care, and boarding services tailored to your
-                    pet's unique needs. Experience the difference of expert care.</p>
-                <div class="hero-actions">
-                    <a href="#" class="btn-primary">Book Now</a>
-                    <a href="#" class="btn-outline">Our Services</a>
-                </div>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
+                    <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>
+                Grooming Services
             </div>
-            <div class="hero-media">
-                <div class="hero-img-box">
-                    <img src="images/about-2.jpg" alt="">
-                </div>
-
-            </div>
+            <h1 class="hero-title">Professional Grooming</h1>
+            <p class="hero-desc">Keep your pet looking sharp and feeling fresh with our full-service grooming. From
+                breed-specific cuts to luxurious spa treatments.</p>
         </section>
 
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Overview -->
+                <div class="section-block reveal">
 
+                    <div class="text-content">
+                        <h2 class="block-title">
+                            <img src="images/bg_2.jpg" alt="">
+                            <!-- Service Overview -->
+                        </h2>
+                        <p>Our Professional Grooming service is designed to keep your pet healthy, comfortable, and
+                            looking their best. We use premium, hypoallergenic products suitable for sensitive skin and
+                            employ gentle handling techniques to ensure a stress-free experience for your furry friend.
+                        </p>
+                        <p>Whether your pet needs a simple bath and brush or a full breed-standard haircut, our
+                            certified groomers are trained to handle all breeds and temperaments with care and
+                            expertise.</p>
+                    </div>
+                </div>
 
-        <!-- Features Grid -->
-        <section class="container reveal">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700;">Comprehensive
-                    Care</h2>
-                <p style="color: var(--fg-muted); font-size: 1.0625rem; max-width: 600px; margin: 0.5rem auto 0;">
-                    Everything your pet needs under one roof.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
-                            <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg></div>
-                    <h3 class="feature-title">Grooming</h3>
-                    <p class="feature-desc">Breed-specific cuts, spa treatments, and hygiene care using premium
-                        products.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                        </svg></div>
-                    <h3 class="feature-title">Veterinary</h3>
-                    <p class="feature-desc">Full medical exams, vaccinations, and emergency care with modern equipment.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                            <polyline points="9 22 9 12 15 12 15 22" />
-                        </svg></div>
-                    <h3 class="feature-title">Boarding</h3>
-                    <p class="feature-desc">Safe, comfortable stays with climate control and 24/7 supervision.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg></div>
-                    <h3 class="feature-title">Walking</h3>
-                    <p class="feature-desc">Regular exercise routines tailored to your dog's energy levels.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                        </svg></div>
-                    <h3 class="feature-title">Training</h3>
-                    <p class="feature-desc">Obedience classes and behavioral modification by certified trainers.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                        </svg></div>
-                    <h3 class="feature-title">Pet Sitting</h3>
-                    <p class="feature-desc">In-home care visits to keep your pet comfortable in familiar surroundings.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Split -->
-        <section style="background: rgba(0,0,0,0.02);">
-            <div class="container about-split">
-                <div class="about-images reveal">
-                    <div class="about-img-main">
-                        <img src="images/about-3.jpg" alt="">
-                    </div>
-                    <div class="about-img-float">
-                        <div
-                            style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.25rem; margin-bottom: 0.5rem;">
-                            Our Impact</div>
-                        <div class="about-stats">
-                            <div class="stat">
-                                <h4>8+</h4>
-                                <p>Years</p>
-                            </div>
-                            <div class="stat">
-                                <h4>15k</h4>
-                                <p>Pets</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-content reveal">
-                    <h2>We treat your pets like <span>family</span></h2>
-                    <p>Founded in 2016, PawCare started with a simple mission: to provide exceptional care that pets
-                        deserve and owners trust. Our team of certified professionals brings decades of combined
-                        experience in veterinary medicine, grooming, and animal behavior.</p>
-                    <p>Every interaction is guided by compassion, backed by science, and delivered with love.</p>
-                    <a href="#" class="btn-outline"
-                        style="display: inline-flex; margin-top: 1rem; border-color: var(--accent); color: var(--accent);">Learn
-                        More About Us</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team Grid -->
-        <section class="container">
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700;">Meet Our Team
-                </h2>
-                <p style="color: var(--fg-muted); font-size: 1.0625rem; max-width: 600px; margin: 0.5rem auto 0;">The
-                    passionate experts behind PawCare.</p>
-            </div>
-            <div class="team-grid">
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                        <img src="images/person_1.jpg" alt="">
-                    </div>
-                    <div class="team-name">Dr. Sarah Mitchell</div>
-                    <div class="team-role">Chief Veterinarian</div>
-                </div>
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                        <img src="images/person_2.jpg" alt="">
-                    </div>
-                    <div class="team-name">Michael Chen</div>
-                    <div class="team-role">Founder & CEO</div>
-                </div>
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                          <img src="images/person_3.jpg" alt="">
-                    </div>
-                    <div class="team-name">Emily Rodriguez</div>
-                    <div class="team-role">Head Groomer</div>
-                </div>
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                          <img src="images/person_4.jpg" alt="">
-                    </div>
-                    <div class="team-name">James Wilson</div>
-                    <div class="team-role">Care Coordinator</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dark Stats Section -->
-        <section class="dark-section">
-            <div class="container reveal">
-                <div style="text-align: center; margin-bottom: 4rem;">
-                    <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700;">Our Numbers
-                        Speak</h2>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 1.0625rem;">Growing trust, one pet at a time.</p>
-                </div>
-                <div class="dark-stats-grid">
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">15K+</div>
-                        <div class="dark-stat-label">Happy Pets</div>
-                    </div>
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">50+</div>
-                        <div class="dark-stat-label">Expert Staff</div>
-                    </div>
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">99%</div>
-                        <div class="dark-stat-label">Satisfaction Rate</div>
-                    </div>
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">24/7</div>
-                        <div class="dark-stat-label">Support Available</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="container">
-            <div class="cta-grid reveal">
-                <div class="cta-content">
-                    <h2>Download Our App</h2>
-                    <p>Book appointments, track your pet's health records, and receive real-time updates all from your
-                        phone.</p>
-                </div>
-                <div class="cta-buttons">
-                    <a href="#" class="app-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                <!-- Packages -->
+                <div class="section-block reveal">
+                    <h2 class="block-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                            <line x1="7" y1="7" x2="7.01" y2="7" />
                         </svg>
-                        <div class="app-btn-text">
-                            <div>Download on the</div>
-                            <div>App Store</div>
+                        Packages & Pricing
+                    </h2>
+                    <div class="pricing-grid">
+                        <div class="price-card">
+                            <div class="price-header">
+                                <div class="price-name">Essential Bath</div>
+                                <div class="price-amount">$45 <span>/ session</span></div>
+                            </div>
+                            <ul class="price-features">
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Bath & Dry</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Brush Out</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Ear Cleaning</li>
+                            </ul>
                         </div>
-                    </a>
-                    <a href="#" class="app-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+
+                        <div class="price-card featured">
+                            <div class="price-header">
+                                <div class="price-name">Full Groom</div>
+                                <div class="price-amount">$75 <span>/ session</span></div>
+                            </div>
+                            <ul class="price-features">
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Everything in Essential</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Full Haircut</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Nail Trim & File</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Gland Expression</li>
+                            </ul>
+                        </div>
+
+                        <div class="price-card">
+                            <div class="price-header">
+                                <div class="price-name">Spaw Day</div>
+                                <div class="price-amount">$120 <span>/ session</span></div>
+                            </div>
+                            <ul class="price-features">
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Everything in Full Groom</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Blueberry Facial</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Paw Massage</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>Premium Scent</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="section-block reveal">
+                    <h2 class="block-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                         </svg>
-                        <div class="app-btn-text">
-                            <div>Get it on</div>
-                            <div>Google Play</div>
+                        Why Choose Our Grooming?
+                    </h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                </svg></div>
+                            <div class="feature-text">
+                                <h4>Gentle Handling</h4>
+                                <p>Stress-free techniques for anxious pets.</p>
+                            </div>
                         </div>
-                    </a>
+                        <div class="feature-item">
+                            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg></div>
+                            <div class="feature-text">
+                                <h4>Efficient Service</h4>
+                                <p>Most appointments take just 2-3 hours.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
+                                    <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+                                </svg></div>
+                            <div class="feature-text">
+                                <h4>Premium Products</h4>
+                                <p>Hypoallergenic shampoos and conditioners.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg></div>
+                            <div class="feature-text">
+                                <h4>Expert Stylists</h4>
+                                <p>Certified in breed-specific cuts.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Booking Card -->
+                <div class="sidebar-card reveal">
+                    <h3
+                        style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.125rem; margin-bottom: 1rem;">
+                        Book this Service</h3>
+                    <form class="booking-form" onsubmit="event.preventDefault();">
+                        <div class="form-group">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" class="form-input" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pet Name</label>
+                            <input type="text" class="form-input" placeholder="Buddy">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Date</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <button class="book-btn">Book Appointment</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="sidebar-card reveal">
+                    <h3
+                        style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.125rem; margin-bottom: 1rem;">
+                        Questions?</h3>
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg></div>
+                        <div class="contact-text">
+                            <strong>Phone</strong>
+                            +1 (555) 123-4567
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg></div>
+                        <div class="contact-text">
+                            <strong>Email</strong>
+                            hello@pawcare.com
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg></div>
+                        <div class="contact-text">
+                            <strong>Hours</strong>
+                            Mon-Sat: 8AM - 8PM
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
     </main>
 
-    <!-- =========================================
-       REDESIGNED FOOTER
-    ========================================= -->
+
     <footer>
         <!-- Newsletter Strip -->
         <div class="footer-newsletter">
@@ -1690,7 +1403,6 @@
             <!-- Column 1: Brand & Contact -->
             <div>
                 <div class="footer-brand">
-                    
                     <a href="index.html">
                         <img src="images/logo.png" width="200px" alt="">
                     </a>
@@ -1799,12 +1511,7 @@
                 <div class="copyright">
                     &copy; 2026 <a href="#">Pet Service</a>. All Rights Reserved.
                 </div>
-                <div class="payment-methods">
-                    <div class="payment-icon">VISA</div>
-                    <div class="payment-icon">MC</div>
-                    <div class="payment-icon">AMEX</div>
-                    <div class="payment-icon">PP</div>
-                </div>
+
                 <div class="legal-links">
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
@@ -1818,6 +1525,8 @@
         // State
         let isRtl = false;
         let isMenuOpen = false;
+
+        // DOM Elements
         const html = document.documentElement;
         const navbar = document.querySelector('.navbar');
         const rtlToggle = document.getElementById('rtlToggle');
@@ -1839,10 +1548,11 @@
             isMenuOpen = !isMenuOpen;
             menuToggle.classList.toggle('active', isMenuOpen);
             mobileMenu.classList.toggle('active', isMenuOpen);
+            menuToggle.setAttribute('aria-expanded', isMenuOpen);
+            mobileMenu.setAttribute('aria-hidden', !isMenuOpen);
             document.body.style.overflow = isMenuOpen ? 'hidden' : '';
         });
 
-        // Close mobile menu on link click
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 isMenuOpen = false;
@@ -1854,16 +1564,19 @@
 
         // Scroll Effects
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         }, { passive: true });
 
         // Scroll Reveal
         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    setTimeout(() => entry.target.classList.add('visible'), index * 100);
                 }
             });
         }, observerOptions);

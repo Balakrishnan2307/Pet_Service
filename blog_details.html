@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawCare - Home 2</title>
+    <title>Summer Safety Guide - PawCare Blog</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +15,8 @@
     <style>
         :root {
             --bg: #F9FAFB;
-            --bg-alt: #FFFFFF;
-            --bg-dark: #111827;
+            --bg-elevated: #FFFFFF;
+            --bg-card: #FFFFFF;
             --fg: #111827;
             --fg-muted: #6B7280;
             --fg-subtle: #9CA3AF;
@@ -25,10 +25,9 @@
             --accent-glow: rgba(0, 189, 86, 0.15);
             --accent-soft: rgba(0, 189, 86, 0.08);
             --border: rgba(0, 0, 0, 0.06);
-            --border-dark: rgba(255, 255, 255, 0.1);
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -52,6 +51,29 @@
             font-family: 'Space Grotesk', sans-serif;
         }
 
+        /* Reading Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0, 189, 86, 0.06), transparent),
+                radial-gradient(circle at 10% 80%, rgba(0, 189, 86, 0.04), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         /* Navbar */
         .navbar {
             position: fixed;
@@ -66,6 +88,7 @@
         .navbar.scrolled {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
         }
@@ -96,6 +119,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 12px var(--accent-glow);
+            transition: transform 0.3s ease;
         }
 
         .logo:hover .logo-icon {
@@ -106,6 +130,7 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .logo-text span {
@@ -115,7 +140,7 @@
         .nav-links {
             display: none;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
             list-style: none;
         }
 
@@ -228,12 +253,16 @@
             }
         }
 
+        .menu-toggle:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+
         .menu-toggle span {
             width: 18px;
             height: 2px;
             background: var(--fg);
             border-radius: 2px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .menu-toggle.active span:nth-child(1) {
@@ -259,7 +288,7 @@
             padding: 7rem 2rem 2rem;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .mobile-menu.active {
@@ -287,629 +316,483 @@
             z-index: 1;
         }
 
-        section {
-            padding: 5rem 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            section {
-                padding: 7rem 2rem;
-            }
-        }
-
         .container {
             max-width: 1280px;
             margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        /* Hero Section (Split Layout) */
-        .hero-split {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            align-items: center;
+        /* Article Header */
+        .article-header {
             padding-top: 8rem;
-        }
-
-        @media (min-width: 1024px) {
-            .hero-split {
-                grid-template-columns: 1fr 1fr;
-                gap: 4rem;
-            }
-        }
-
-        .hero-content {
+            padding-bottom: 3rem;
             text-align: center;
         }
 
-        @media (min-width: 1024px) {
-            .hero-content {
-                text-align: start;
-            }
-        }
-
-        .hero-badge {
+        .article-category {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.375rem;
             padding: 0.5rem 1rem;
-            background: white;
-            border: 1px solid rgba(0, 189, 86, 0.2);
-            border-radius: 100px;
+            background: var(--accent-soft);
             color: var(--accent);
             font-size: 0.8125rem;
             font-weight: 600;
+            border-radius: 100px;
             margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            animation: fadeInDown 0.8s ease forwards;
         }
 
-        .hero-title {
+        .article-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease 0.1s forwards;
-            opacity: 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero-title span {
-            color: var(--accent);
-        }
-
-        .hero-desc {
-            color: var(--fg-muted);
-            font-size: 1.125rem;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
-        }
-
-        .hero-actions {
+        .article-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
             justify-content: center;
-            animation: fadeInUp 0.8s ease 0.3s forwards;
-            opacity: 0;
-        }
-
-        @media (min-width: 1024px) {
-            .hero-actions {
-                justify-content: flex-start;
-            }
-        }
-
-        .btn-primary {
-            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: var(--accent);
-            color: #fff;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px var(--accent-glow);
+            gap: 1.5rem;
+            color: var(--fg-muted);
+            font-size: 0.9375rem;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            background: var(--accent-dark);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--fg);
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-soft);
-        }
-
-        .hero-media {
-            position: relative;
-            animation: fadeIn 1s ease 0.4s forwards;
-            opacity: 0;
-        }
-
-        .hero-img-box {
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-img-box svg {
-            width: 100px;
-            height: 100px;
-            color: var(--fg-subtle);
-            opacity: 0.3;
-        }
-
-        .hero-float-card {
-            position: absolute;
-            background: white;
-            padding: 1rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
+        .author-info {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            animation: float 4s ease-in-out infinite;
         }
 
-        .hero-float-card.top-left {
-            top: 10%;
-            left: -10%;
-            animation-delay: 0s;
-        }
-
-        .hero-float-card.bottom-right {
-            bottom: 10%;
-            right: -10%;
-            animation-delay: 2s;
-        }
-
-        @media (max-width: 1024px) {
-            .hero-float-card {
-                display: none;
-            }
-        }
-
-        .float-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #fff;
+            font-weight: 600;
         }
 
-        .float-icon.green {
-            background: var(--accent-soft);
-            color: var(--accent);
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
         }
 
-        .float-icon.orange {
-            background: rgba(245, 158, 11, 0.1);
-            color: #F59E0B;
-        }
-
-        .float-text div:first-child {
-            font-size: 0.6875rem;
-            color: var(--fg-muted);
-        }
-
-        .float-text div:last-child {
-            font-family: 'Space Grotesk';
-            font-weight: 700;
-        }
-
-        /* Logo Cloud */
-        .logo-cloud {
-            padding: 4rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo-cloud-title {
-            text-align: center;
-            font-size: 0.875rem;
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
             color: var(--fg-subtle);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
         }
 
-        .logo-grid {
+        /* Featured Image */
+        .featured-image-wrapper {
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .featured-image {
+            width: 100%;
+            aspect-ratio: 2/1;
+            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             align-items: center;
-            gap: 3rem;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
+            justify-content: center;
         }
 
-        .logo-grid:hover {
-            opacity: 0.8;
+        .featured-image svg {
+            width: 80px;
+            height: 80px;
+            color: var(--fg-subtle);
+            opacity: 0.5;
         }
 
-        .logo-item {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--fg-muted);
-        }
-
-        /* Features Grid */
-        .features-grid {
+        /* Article Layout */
+        .article-layout {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            gap: 3rem;
+            padding-bottom: 4rem;
         }
 
         @media (min-width: 1024px) {
-            .features-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .article-layout {
+                grid-template-columns: 1fr 280px;
             }
         }
 
-        .feature-card {
-            background: white;
+        /* Article Content */
+        .article-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        @media (min-width: 768px) {
+            .article-content {
+                padding: 3rem;
+            }
+        }
+
+        .article-content p {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            color: var(--fg);
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--fg);
+        }
+
+        .article-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--fg);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        [dir="rtl"] .article-content ul,
+        [dir="rtl"] .article-content ol {
+            padding-left: 0;
+            padding-right: 1.5rem;
+        }
+
+        .article-content li {
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            color: var(--fg);
+        }
+
+        .article-content blockquote {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--accent-soft);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: var(--fg);
+        }
+
+        [dir="rtl"] .article-content blockquote {
+            border-left: none;
+            border-right: 4px solid var(--accent);
+            border-radius: 12px 0 0 12px;
+        }
+
+        .article-content a {
+            color: var(--accent);
+            text-decoration: underline;
+            transition: opacity 0.2s ease;
+        }
+
+        .article-content a:hover {
+            opacity: 0.8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 100px;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+        .sidebar-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: transparent;
+        .share-buttons {
+            display: flex;
+            gap: 0.75rem;
         }
 
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-soft);
-            border-radius: 12px;
+        .share-btn {
+            flex: 1;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 10px;
+            color: var(--fg-muted);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
         }
 
-        .feature-card:hover .feature-icon {
+        .share-btn:hover {
             background: var(--accent);
-        }
-
-        .feature-icon svg {
-            width: 24px;
-            height: 24px;
-            color: var(--accent);
-            transition: color 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon svg {
             color: #fff;
         }
 
-        .feature-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.125rem;
-            font-weight: 600;
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
             margin-bottom: 0.5rem;
         }
 
-        .feature-desc {
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--fg-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+
+        [dir="rtl"] .toc-link {
+            border-left: none;
+            border-right: 2px solid transparent;
+        }
+
+        .toc-link:hover,
+        .toc-link.active {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Tags */
+        .tags-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .tag {
+            padding: 0.375rem 0.875rem;
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            color: var(--fg-muted);
+            font-size: 0.8125rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Author Box */
+        .author-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        @media (min-width: 768px) {
+            .author-box {
+                flex-direction: row;
+                text-align: left;
+            }
+
+            [dir="rtl"] .author-box {
+                text-align: right;
+            }
+        }
+
+        .author-box-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .author-box-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-box-role {
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-box-bio {
             color: var(--fg-muted);
             font-size: 0.9375rem;
             line-height: 1.6;
         }
 
-        /* About Split */
-        .about-split {
+        /* Related Posts */
+        .related-posts {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .posts-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 4rem;
-            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .posts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (min-width: 1024px) {
-            .about-split {
-                grid-template-columns: 1.2fr 1fr;
+            .posts-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        .about-images {
-            position: relative;
-        }
-
-        .about-img-main {
-            width: 100%;
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-md);
-        }
-
-        .about-img-main svg {
-            width: 60px;
-            height: 60px;
-            color: var(--fg-subtle);
-            opacity: 0.3;
-        }
-
-        .about-img-float {
-            position: absolute;
-            width: 50%;
-            bottom: -2rem;
-            right: -1rem;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
-            text-align: center;
-        }
-
-        [dir="rtl"] .about-img-float {
-            right: auto;
-            left: -1rem;
-        }
-
-        .about-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1rem;
-        }
-
-        .stat h4 {
-            font-family: 'Space Grotesk';
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .stat p {
-            font-size: 0.75rem;
-            color: var(--fg-muted);
-        }
-
-        .about-content h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .about-content h2 span {
-            color: var(--accent);
-        }
-
-        .about-content p {
-            color: var(--fg-muted);
-            font-size: 1.0625rem;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        /* Team Grid */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .team-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .team-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .team-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #E5E7EB, #F3F4F6);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .team-avatar svg {
-            width: 40px;
-            height: 40px;
-            color: var(--fg-subtle);
-        }
-
-        .team-name {
-            font-family: 'Space Grotesk';
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .team-role {
-            font-size: 0.8125rem;
-            color: var(--accent);
-        }
-
-        /* Dark Stats Section */
-        .dark-section {
-            background: var(--bg-dark);
-            color: white;
-            position: relative;
             overflow: hidden;
-        }
-
-        .dark-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 189, 86, 0.15), transparent 60%);
-            pointer-events: none;
-        }
-
-        .dark-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .dark-stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .dark-stat {
-            position: relative;
-            z-index: 1;
-        }
-
-        .dark-stat-value {
-            font-family: 'Space Grotesk';
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .dark-stat-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9375rem;
-        }
-
-        /* CTA Section */
-        .cta-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            align-items: center;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 3rem 2rem;
+            transition: all 0.3s ease;
             box-shadow: var(--shadow-sm);
         }
 
-        @media (min-width: 768px) {
-            .cta-grid {
-                grid-template-columns: 1fr 1fr;
-                padding: 3rem;
-            }
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .cta-content h2 {
-            font-family: 'Space Grotesk';
-            font-size: 2rem;
-            font-weight: 700;
+        .post-card-image {
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #F3F4F6, #E5E7EB);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .post-card-image svg {
+            width: 40px;
+            height: 40px;
+            color: var(--fg-subtle);
+            opacity: 0.4;
+        }
+
+        .post-card-content {
+            padding: 1.5rem;
+        }
+
+        .post-card-category {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: 1.4;
             margin-bottom: 0.5rem;
         }
 
-        .cta-content p {
-            color: var(--fg-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .app-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            background: #000;
-            color: #fff;
+        .post-card-title a {
             text-decoration: none;
-            border-radius: 12px;
-            transition: transform 0.2s ease;
+            color: inherit;
+            transition: color 0.2s ease;
         }
 
-        .app-btn:hover {
-            transform: scale(1.05);
+        .post-card-title a:hover {
+            color: var(--accent);
         }
 
-        .app-btn svg {
-            width: 24px;
-            height: 24px;
+        .post-card-date {
+            font-size: 0.8125rem;
+            color: var(--fg-subtle);
         }
 
-        .app-btn-text {
-            text-align: start;
-        }
-
-        .app-btn-text div:first-child {
-            font-size: 0.625rem;
-            opacity: 0.7;
-        }
-
-        .app-btn-text div:last-child {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        /* =========================================
-       REDESIGNED FOOTER STYLES
-    ========================================= */
+        /* Footer */
         footer {
-            background: var(--bg-dark);
+            background: #111827;
             color: #fff;
             position: relative;
             z-index: 1;
@@ -1184,73 +1067,7 @@
             color: #fff;
         }
 
-        .payment-methods {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .payment-icon {
-            width: 40px;
-            height: 26px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.625rem;
-            font-weight: 700;
-            color: #fff;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
+        /* Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -1262,14 +1079,14 @@
             transform: translateY(0);
         }
 
-        /* Utils */
+        /* Focus States */
         a:focus-visible,
-        button:focus-visible,
-        input:focus-visible {
+        button:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
         }
 
+        /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
 
             *,
@@ -1283,7 +1100,6 @@
         /* Dropdown */
         .dropdown {
             position: relative;
-            /* background-color: white; */
         }
 
         .dropdown-trigger {
@@ -1328,7 +1144,6 @@
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
-            background-color: white;
         }
 
         .dropdown-item {
@@ -1357,7 +1172,8 @@
 </head>
 
 <body>
-    <!-- Navbar -->
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="bg-pattern"></div>
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="navbar-inner">
             <a href="#" class="logo" aria-label="PawCare Home">
@@ -1387,7 +1203,7 @@
                     </div>
                 </li>
                 <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
                 <li><a href="pricing.html" class="nav-link">Pricing</a></li>
                 <li><a href="service.html" class="nav-link">Service</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
@@ -1423,7 +1239,7 @@
         <a href="index.html" class="mobile-nav-link active">Home 1</a>
         <a href="index_2.html" class="mobile-nav-link">Home 2</a>
         <a href="about.html" class="mobile-nav-link">About </a>
-        <a href="blog.html" class="mobile-nav-link">Blog</a>
+        <a href="blog.html" class="mobile-nav-link active">Blog</a>
         <a href="pricing.html" class="mobile-nav-link">Pricing</a>
         <a href="service.html" class="mobile-nav-link">Service</a>
         <a href="contact.html" class="mobile-nav-link">Contact</a>
@@ -1431,245 +1247,230 @@
         <a href="login.html" class="mobile-nav-link">Login</a>
     </div>
 
+
+
     <main>
-        <!-- Hero Split Layout -->
-        <section class="hero-split container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="4" />
+        <!-- Article Header -->
+        <header class="article-header">
+            <div class="container">
+                <span class="article-category">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
-                    Premium Pet Care
-                </div>
-                <h1 class="hero-title">Caring for your <span>best friends</span></h1>
-                <p class="hero-desc">Professional grooming, veterinary care, and boarding services tailored to your
-                    pet's unique needs. Experience the difference of expert care.</p>
-                <div class="hero-actions">
-                    <a href="#" class="btn-primary">Book Now</a>
-                    <a href="#" class="btn-outline">Our Services</a>
-                </div>
-            </div>
-            <div class="hero-media">
-                <div class="hero-img-box">
-                    <img src="images/about-2.jpg" alt="">
-                </div>
-
-            </div>
-        </section>
-
-
-
-        <!-- Features Grid -->
-        <section class="container reveal">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700;">Comprehensive
-                    Care</h2>
-                <p style="color: var(--fg-muted); font-size: 1.0625rem; max-width: 600px; margin: 0.5rem auto 0;">
-                    Everything your pet needs under one roof.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3" />
-                            <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg></div>
-                    <h3 class="feature-title">Grooming</h3>
-                    <p class="feature-desc">Breed-specific cuts, spa treatments, and hygiene care using premium
-                        products.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                        </svg></div>
-                    <h3 class="feature-title">Veterinary</h3>
-                    <p class="feature-desc">Full medical exams, vaccinations, and emergency care with modern equipment.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                            <polyline points="9 22 9 12 15 12 15 22" />
-                        </svg></div>
-                    <h3 class="feature-title">Boarding</h3>
-                    <p class="feature-desc">Safe, comfortable stays with climate control and 24/7 supervision.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
+                    Health
+                </span>
+                <h1 class="article-title">Summer Safety Guide: Protecting Your Pet from Heat and Sun</h1>
+                <div class="article-meta">
+                    <div class="author-info">
+                        <div class="author-avatar">SM</div>
+                        <div>
+                            <strong>Dr. Sarah Mitchell</strong>
+                            <div style="font-size: 0.8125rem; color: var(--fg-muted);">Chief Veterinarian</div>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                        June 15, 2024
+                    </div>
+                    <div class="meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10" />
                             <polyline points="12 6 12 12 16 14" />
-                        </svg></div>
-                    <h3 class="feature-title">Walking</h3>
-                    <p class="feature-desc">Regular exercise routines tailored to your dog's energy levels.</p>
+                        </svg>
+                        8 min read
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                        </svg></div>
-                    <h3 class="feature-title">Training</h3>
-                    <p class="feature-desc">Obedience classes and behavioral modification by certified trainers.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                        </svg></div>
-                    <h3 class="feature-title">Pet Sitting</h3>
-                    <p class="feature-desc">In-home care visits to keep your pet comfortable in familiar surroundings.
+            </div>
+        </header>
+
+
+
+        <!-- Article Content -->
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-content reveal">
+                    <p>As temperatures rise during the summer months, it's essential to take extra precautions to keep
+                        your furry friends safe and comfortable. Heat and sun can pose serious risks to pets, just as
+                        they do to humans. In this comprehensive guide, we'll explore the best practices for protecting
+                        your pet during the hottest time of the year.</p>
+
+                    <h2>Understanding Heat Risks for Pets</h2>
+                    <p>Unlike humans, dogs and cats have limited ability to cool themselves down. They primarily
+                        regulate their body temperature through panting and, to a lesser extent, through their paw pads.
+                        This makes them particularly vulnerable to heatstroke, a potentially life-threatening condition.
                     </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- About Split -->
-        <section style="background: rgba(0,0,0,0.02);">
-            <div class="container about-split">
-                <div class="about-images reveal">
-                    <div class="about-img-main">
-                        <img src="images/about-3.jpg" alt="">
+                    <blockquote>
+                        "Heatstroke can occur when a pet's body temperature exceeds 104°F (40°C). It requires immediate
+                        veterinary attention and can be fatal if left untreated." — Dr. Sarah Mitchell
+                    </blockquote>
+
+                    <h3>Signs of Heatstroke</h3>
+                    <ul>
+                        <li>Excessive panting or difficulty breathing</li>
+                        <li>Drooling, often thick saliva</li>
+                        <li>Weakness or collapse</li>
+                        <li>Vomiting or diarrhea</li>
+                        <li>Bright red or pale gums</li>
+                        <li>Confusion or disorientation</li>
+                    </ul>
+
+                    <h2>Essential Summer Safety Tips</h2>
+
+                    <h3>1. Hydration is Key</h3>
+                    <p>Ensure your pet has access to fresh, clean water at all times. Consider placing multiple water
+                        bowls around your home and yard. When going for walks, bring a portable water bowl and offer
+                        water frequently.</p>
+
+                    <h3>2. Mind the Pavement</h3>
+                    <p>Asphalt and concrete can become scorching hot under the summer sun. Before walking your dog,
+                        place the back of your hand on the pavement for 7 seconds. If it's too hot for you, it's too hot
+                        for their paws. Opt for grassy areas or walk during cooler parts of the day.</p>
+
+                    <h3>3. Never Leave Pets in Parked Cars</h3>
+                    <p>Even with windows cracked, the temperature inside a parked car can reach dangerous levels within
+                        minutes. On a 75°F day, the interior of a car can reach 100°F in just 10 minutes. Always take
+                        your pet with you or leave them safely at home.</p>
+
+                    <h3>4. Provide Shade and Shelter</h3>
+                    <p>If your pet spends time outdoors, ensure they have access to shaded areas. Consider setting up a
+                        canopy or umbrella. A doghouse isn't always sufficient, as it can trap heat.</p>
+
+                    <h2>Recognizing Sunburn in Pets</h2>
+                    <p>Yes, pets can get sunburned too! Animals with light-colored fur, thin coats, or exposed skin
+                        (like around the nose and ears) are particularly susceptible. Signs of sunburn include:</p>
+                    <ul>
+                        <li>Red or inflamed skin</li>
+                        <li>Hair loss</li>
+                        <li>Peeling skin</li>
+                        <li>Sensitivity to touch</li>
+                    </ul>
+
+                    <h2>Safe Exercise Routines</h2>
+                    <p>Maintaining exercise is important, but adjust your routine during summer. Walk your dog early in
+                        the morning or late in the evening when temperatures are cooler. Keep walks shorter and less
+                        intense on particularly hot days.</p>
+
+                    <h3>Water Activities</h3>
+                    <p>Swimming is an excellent way for dogs to exercise while staying cool. If you have access to a
+                        safe body of water, consider introducing your pet to swimming. Always supervise them, and use a
+                        pet life jacket for safety, especially in open water.</p>
+
+                    <div class="tags-wrapper">
+                        <a href="#" class="tag">Summer</a>
+                        <a href="#" class="tag">Safety</a>
+                        <a href="#" class="tag">Heatstroke</a>
+                        <a href="#" class="tag">Dogs</a>
+                        <a href="#" class="tag">Cats</a>
                     </div>
-                    <div class="about-img-float">
-                        <div
-                            style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 1.25rem; margin-bottom: 0.5rem;">
-                            Our Impact</div>
-                        <div class="about-stats">
-                            <div class="stat">
-                                <h4>8+</h4>
-                                <p>Years</p>
-                            </div>
-                            <div class="stat">
-                                <h4>15k</h4>
-                                <p>Pets</p>
-                            </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">Share This Post</h3>
+                        <div class="share-buttons">
+                            <button class="share-btn" aria-label="Share on Facebook">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                                </svg>
+                            </button>
+                            <button class="share-btn" aria-label="Share on Twitter">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                                </svg>
+                            </button>
+                            <button class="share-btn" aria-label="Share on LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </button>
+                            <button class="share-btn" aria-label="Copy Link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="about-content reveal">
-                    <h2>We treat your pets like <span>family</span></h2>
-                    <p>Founded in 2016, PawCare started with a simple mission: to provide exceptional care that pets
-                        deserve and owners trust. Our team of certified professionals brings decades of combined
-                        experience in veterinary medicine, grooming, and animal behavior.</p>
-                    <p>Every interaction is guided by compassion, backed by science, and delivered with love.</p>
-                    <a href="#" class="btn-outline"
-                        style="display: inline-flex; margin-top: 1rem; border-color: var(--accent); color: var(--accent);">Learn
-                        More About Us</a>
-                </div>
-            </div>
-        </section>
 
-        <!-- Team Grid -->
-        <section class="container">
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700;">Meet Our Team
-                </h2>
-                <p style="color: var(--fg-muted); font-size: 1.0625rem; max-width: 600px; margin: 0.5rem auto 0;">The
-                    passionate experts behind PawCare.</p>
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">Table of Contents</h3>
+                        <ul class="toc-list">
+                            <li><a href="#" class="toc-link active">Understanding Heat Risks</a></li>
+                            <li><a href="#" class="toc-link">Essential Safety Tips</a></li>
+                            <li><a href="#" class="toc-link">Recognizing Sunburn</a></li>
+                            <li><a href="#" class="toc-link">Safe Exercise Routines</a></li>
+                        </ul>
+                    </div>
+                </aside>
             </div>
-            <div class="team-grid">
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                        <img src="images/person_1.jpg" alt="">
-                    </div>
-                    <div class="team-name">Dr. Sarah Mitchell</div>
-                    <div class="team-role">Chief Veterinarian</div>
-                </div>
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                        <img src="images/person_2.jpg" alt="">
-                    </div>
-                    <div class="team-name">Michael Chen</div>
-                    <div class="team-role">Founder & CEO</div>
-                </div>
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                          <img src="images/person_3.jpg" alt="">
-                    </div>
-                    <div class="team-name">Emily Rodriguez</div>
-                    <div class="team-role">Head Groomer</div>
-                </div>
-                <div class="team-card reveal">
-                    <div class="team-avatar">
-                          <img src="images/person_4.jpg" alt="">
-                    </div>
-                    <div class="team-name">James Wilson</div>
-                    <div class="team-role">Care Coordinator</div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Dark Stats Section -->
-        <section class="dark-section">
-            <div class="container reveal">
-                <div style="text-align: center; margin-bottom: 4rem;">
-                    <h2 class="font-display" style="font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700;">Our Numbers
-                        Speak</h2>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 1.0625rem;">Growing trust, one pet at a time.</p>
-                </div>
-                <div class="dark-stats-grid">
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">15K+</div>
-                        <div class="dark-stat-label">Happy Pets</div>
-                    </div>
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">50+</div>
-                        <div class="dark-stat-label">Expert Staff</div>
-                    </div>
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">99%</div>
-                        <div class="dark-stat-label">Satisfaction Rate</div>
-                    </div>
-                    <div class="dark-stat">
-                        <div class="dark-stat-value">24/7</div>
-                        <div class="dark-stat-label">Support Available</div>
-                    </div>
+            <!-- Author Box -->
+            <div class="author-box reveal">
+                <div class="author-box-avatar">SM</div>
+                <div class="author-box-content">
+                    <h3>Dr. Sarah Mitchell</h3>
+                    <div class="author-box-role">Chief Veterinarian</div>
+                    <p class="author-box-bio">Dr. Mitchell has over 15 years of experience in veterinary medicine. She
+                        specializes in preventive care and pet nutrition, helping families provide the best life for
+                        their companions.</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- CTA Section -->
-        <section class="container">
-            <div class="cta-grid reveal">
-                <div class="cta-content">
-                    <h2>Download Our App</h2>
-                    <p>Book appointments, track your pet's health records, and receive real-time updates all from your
-                        phone.</p>
-                </div>
-                <div class="cta-buttons">
-                    <a href="#" class="app-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
-                        </svg>
-                        <div class="app-btn-text">
-                            <div>Download on the</div>
-                            <div>App Store</div>
+        <!-- Related Posts -->
+        <section class="related-posts">
+            <div class="container">
+                <h2 class="section-title">Related Articles</h2>
+                <div class="posts-grid">
+                    <div class="post-card reveal">
+                        <div class="post-card-image">
+                            <img src="images/image_1.jpg" alt="">
                         </div>
-                    </a>
-                    <a href="#" class="app-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-                        </svg>
-                        <div class="app-btn-text">
-                            <div>Get it on</div>
-                            <div>Google Play</div>
+                        <div class="post-card-content">
+                            <span class="post-card-category">Nutrition</span>
+                            <h3 class="post-card-title"><a href="#">Understanding Your Pet's Dietary Needs by Age</a>
+                            </h3>
+                            <div class="post-card-date">May 28, 2024</div>
                         </div>
-                    </a>
+                    </div>
+
+                    <div class="post-card reveal">
+                        <div class="post-card-image">
+                            <img src="images/image_2.jpg" alt="">
+                        </div>
+                        <div class="post-card-content">
+                            <span class="post-card-category">Health</span>
+                            <h3 class="post-card-title"><a href="#">The Importance of Regular Vet Checkups</a></h3>
+                            <div class="post-card-date">May 10, 2024</div>
+                        </div>
+                    </div>
+
+                    <div class="post-card reveal">
+                        <div class="post-card-image">
+                            <img src="images/image_3.jpg" alt="">
+                        </div>
+                        <div class="post-card-content">
+                            <span class="post-card-category">Training</span>
+                            <h3 class="post-card-title"><a href="#">5 Positive Reinforcement Techniques</a></h3>
+                            <div class="post-card-date">May 22, 2024</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- =========================================
-       REDESIGNED FOOTER
-    ========================================= -->
     <footer>
         <!-- Newsletter Strip -->
         <div class="footer-newsletter">
@@ -1690,7 +1491,6 @@
             <!-- Column 1: Brand & Contact -->
             <div>
                 <div class="footer-brand">
-                    
                     <a href="index.html">
                         <img src="images/logo.png" width="200px" alt="">
                     </a>
@@ -1799,12 +1599,7 @@
                 <div class="copyright">
                     &copy; 2026 <a href="#">Pet Service</a>. All Rights Reserved.
                 </div>
-                <div class="payment-methods">
-                    <div class="payment-icon">VISA</div>
-                    <div class="payment-icon">MC</div>
-                    <div class="payment-icon">AMEX</div>
-                    <div class="payment-icon">PP</div>
-                </div>
+
                 <div class="legal-links">
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
@@ -1818,11 +1613,14 @@
         // State
         let isRtl = false;
         let isMenuOpen = false;
+
+        // DOM Elements
         const html = document.documentElement;
         const navbar = document.querySelector('.navbar');
         const rtlToggle = document.getElementById('rtlToggle');
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
+        const progressBar = document.getElementById('progressBar');
 
         // RTL Toggle
         rtlToggle.addEventListener('click', () => {
@@ -1839,10 +1637,11 @@
             isMenuOpen = !isMenuOpen;
             menuToggle.classList.toggle('active', isMenuOpen);
             mobileMenu.classList.toggle('active', isMenuOpen);
+            menuToggle.setAttribute('aria-expanded', isMenuOpen);
+            mobileMenu.setAttribute('aria-hidden', !isMenuOpen);
             document.body.style.overflow = isMenuOpen ? 'hidden' : '';
         });
 
-        // Close mobile menu on link click
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 isMenuOpen = false;
@@ -1854,16 +1653,26 @@
 
         // Scroll Effects
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
+            // Navbar
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Reading Progress
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
         }, { passive: true });
 
         // Scroll Reveal
         const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
         const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    setTimeout(() => entry.target.classList.add('visible'), index * 100);
                 }
             });
         }, observerOptions);
