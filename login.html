@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Service - Login & Signup</title>
+    <title>Pet Service</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="shortcut icon" href="https://via.placeholder.com/32x32" type="image/x-icon">
     <style>
         /* --- CSS Variables & Reset --- */
@@ -232,16 +233,17 @@
         .btn-cta {
             width: 100%;
             padding: 1rem;
-            background: var(--primary-gradient);
+            background-color: #3a9e4d;
+            /* background: var(--primary-gradient); */
             color: var(--white);
             border: none;
             border-radius: 50px;
             /* Pill shape for CTA feel */
-            font-size: 1.1rem;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: var(--shadow-cta);
+            /* box-shadow: var(--shadow-cta); */
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -249,9 +251,12 @@
         }
 
         .btn-cta:hover {
+            background-color: white;
+            color: #3a9e4d;
+            border: 1px solid #3a9e4d;
             transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(92, 188, 107, 0.5);
-            filter: brightness(1.05);
+            /* box-shadow: 0 12px 25px rgba(92, 188, 107, 0.5); */
+            /* filter: brightness(1.05); */
         }
 
         .btn-cta:active {
